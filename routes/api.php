@@ -1,26 +1,14 @@
 <?php
 
-use App\Models\Lookup;
-use App\Models\LookupType;
-use App\Models\User;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
+/************************** auth routes ************************** */
+Route::group([], function () {
+    Route::post('register', [UserController::class, 'register']);
+    Route::post('login', [UserController::class, 'login']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-Route::get('data' , function(){
-    return User::with('role' , 'profile' , 'job')->get();
+    Route::group(['middleware' => 'auth:sanctum'], function () {
+        Route::post('logout', [UserController::class, 'logout']);
+    });
 });

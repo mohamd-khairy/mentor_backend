@@ -18,7 +18,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role_id'
+        'role_id',
+        'mobile',
+        'user_name'
     ];
 
     protected $hidden = [
@@ -38,7 +40,7 @@ class User extends Authenticatable
     {
         return json_encode($value, JSON_UNESCAPED_UNICODE);
     }
-    
+
     public function toArray()
     {
         $attributes = parent::toArray();
