@@ -23,6 +23,16 @@ class User extends Authenticatable
         'user_name'
     ];
 
+    public $visible = [
+        'id',
+        'name',
+        'email',
+        'password',
+        'role_id',
+        'mobile',
+        'user_name'
+    ];
+
     protected $hidden = [
         'password',
         'remember_token',
@@ -32,9 +42,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public $with = ['photo'];
+    public $appends = ['avatar'];
 
     public $translatable = ['name'];
+
+    protected $fillableType = [];
+
+    public function getfillableTypes()
+    {
+        return $this->fillableType;
+    }
 
     protected function asJson($value)
     {
@@ -68,5 +85,10 @@ class User extends Authenticatable
     public function photo()
     {
         return $this->hasOne(File::class, 'item_id')->where('type', 'profile');
+    }
+
+    public function getAvatarAttribute()
+    {
+        return $this->photo ? $this->photo->name : null;
     }
 }

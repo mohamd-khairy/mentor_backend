@@ -17,8 +17,20 @@ class LookupType extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'id',
         'name',
         'key',
+    ];
+
+    public $visible = [
+        'id',
+        'name',
+        'key',
+    ];
+
+    protected $fillableType = [
+        ['item_name' => 'name' , 'item_type' => 'input'],
+        ['item_name' => 'key' , 'item_type' => 'input'],
     ];
 
     protected $casts = [
@@ -26,6 +38,11 @@ class LookupType extends Model
     ];
     
     public $translatable = ['name'];
+
+    public function getfillableTypes()
+    {
+        return $this->fillableType;
+    }
 
     protected function asJson($value)
     {

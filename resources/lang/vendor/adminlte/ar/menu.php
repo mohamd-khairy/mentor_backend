@@ -17,5 +17,11 @@ return [
     'warning'                       => 'Warning',
     'information'                   => 'Information',
     'lookup_section'                => 'LOOKUP SECTION',
-    'lookups'                       => 'Lookups'
+    'lookups'                       => 'Lookups',
+    'user_section'                  => 'USERS SECTION',
+    'users'                         => 'Users',
+    'profile_info'                  => 'Profile Info',
+    'job_info'                      => 'Job Info',
+    'file'                          => 'Media',
+
 ];

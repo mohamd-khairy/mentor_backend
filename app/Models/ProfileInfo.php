@@ -21,10 +21,28 @@ class ProfileInfo extends Model
         'city_id'
     ];
 
+    public $visible = [
+        'id',
+        'user_id',
+        'birth_date',
+        'phone',
+        'interests',
+        'gender_id',
+        'country_id',
+        'city_id'
+    ];
+
     public $translatable = [
         'interests',
     ];
 
+    protected $fillableType = [];
+    
+    public function getfillableTypes()
+    {
+        return $this->fillableType;
+    }
+    
     protected function asJson($value)
     {
         return json_encode($value, JSON_UNESCAPED_UNICODE);

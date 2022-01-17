@@ -18,8 +18,23 @@ class Lookup extends Model
         'lookup_type_id'
     ];
 
+    public $visible = [
+        'id',
+        'name',
+        'key',
+        'parent_id',
+        'lookup_type_id'
+    ];
+
     public $translatable = ['name'];
 
+    protected $fillableType = [];
+    
+    public function getfillableTypes()
+    {
+        return $this->fillableType;
+    }
+    
     protected function asJson($value)
     {
         return json_encode($value, JSON_UNESCAPED_UNICODE);

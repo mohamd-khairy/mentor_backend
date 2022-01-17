@@ -229,6 +229,19 @@ return [
             'type'         => 'fullscreen-widget',
             'topnav_right' => true,
         ],
+        ['header' => 'user_section'],
+        [
+            'text'    => 'users',
+            'url'    => 'user',
+        ],
+        [
+            'text'    => 'job_info',
+            'url'    => 'job_info',
+        ],
+        [
+            'text'    => 'profile_info',
+            'url'    => 'profile_info',
+        ],
         ['header' => 'lookup_section'],
         [
             'text'    => 'lookups',
@@ -236,7 +249,7 @@ return [
             'submenu' => [
                 [
                     'text' => 'lookup_type',
-                    'url'  => 'lookup-type',
+                    'url'  => 'lookup_type',
                 ],
                 [
                     'text' => 'lookup',
@@ -244,13 +257,17 @@ return [
                 ],
             ],
         ],
-
+        [
+            'text'    => 'file',
+            'url'    => 'file',
+            'icon_color' => 'red'
+        ],
         // [
         //     'type'         => 'navbar-search',
         //     'text'         => 'search',
         //     'topnav_right' => true,
         // ],
-        
+
 
         // Sidebar items:
         // [

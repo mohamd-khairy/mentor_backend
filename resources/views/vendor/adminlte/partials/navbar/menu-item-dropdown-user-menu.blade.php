@@ -50,9 +50,10 @@
             @yield('usermenu_header')
         @endif
 
-        {{-- Configured user menu links --}}
-        @each('adminlte::partials.navbar.dropdown-item', $adminlte->menu("navbar-user"), 'item')
-
+        @if(isset($adminlte))
+            {{-- Configured user menu links --}}
+            @each('adminlte::partials.navbar.dropdown-item', $adminlte->menu("navbar-user"), 'item')
+        @endif
         {{-- User menu body --}}
         @hasSection('usermenu_body')
             <li class="user-body">

@@ -15,5 +15,19 @@ class File extends Model
         'item_id',
     ];
 
+    public $visible = [
+        'id',
+        'name',
+        'type',
+        'item_id',
+    ];
+    
     public $timestamps = false;
+
+    protected $fillableType = [];
+    
+    public function getfillableTypes()
+    {
+        return $this->fillableType;
+    }
 }

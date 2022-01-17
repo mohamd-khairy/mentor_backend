@@ -36,6 +36,21 @@ class JobInfo extends Model
         'company',
     ];
 
+    public $visible = [
+        'id',
+        'user_id',
+        'job_title',
+        'topics',
+        'company',
+    ];
+
+    protected $fillableType = [];
+    
+    public function getfillableTypes()
+    {
+        return $this->fillableType;
+    }
+    
     protected function asJson($value)
     {
         return json_encode($value, JSON_UNESCAPED_UNICODE);
