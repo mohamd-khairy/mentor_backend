@@ -10,6 +10,7 @@ class LookupType extends Model
 {
     use HasFactory;
     use HasTranslations;
+    use GeneralModel;
 
     /**
      * The attributes that are mass assignable.
@@ -28,33 +29,14 @@ class LookupType extends Model
         'key',
     ];
 
-    protected $fillableType = [
+    public $fillableType = [
         ['item_name' => 'name' , 'item_type' => 'input'],
         ['item_name' => 'key' , 'item_type' => 'input'],
     ];
 
-    protected $casts = [
+    public $casts = [
         'name' => 'array',
     ];
-    
+
     public $translatable = ['name'];
-
-    public function getfillableTypes()
-    {
-        return $this->fillableType;
-    }
-
-    protected function asJson($value)
-    {
-        return json_encode($value, JSON_UNESCAPED_UNICODE);
-    }
-    
-    public function toArray()
-    {
-        $attributes = parent::toArray();
-        foreach ($this->getTranslatableAttributes() as $field) {
-            $attributes[$field] = $this->getTranslation($field, app()->getLocale());
-        }
-        return $attributes;
-    }
 }

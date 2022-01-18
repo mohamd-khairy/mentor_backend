@@ -10,6 +10,7 @@ class Lookup extends Model
 {
     use HasFactory;
     use HasTranslations;
+    use GeneralModel;
 
     protected $fillable = [
         'name',
@@ -26,28 +27,12 @@ class Lookup extends Model
         'lookup_type_id'
     ];
 
-    public $translatable = ['name'];
+    public $relations_array = [
+        'lookup_type_object' => ['item' => 'lookup_type_id', 'relation_name' => 'lookup_type', 'coulmn' => 'name'],
+        'parent_object' => ['item' => 'parent_id', 'relation_name' => 'parent', 'coulmn' => 'name']
+    ];
 
-    protected $fillableType = [];
-    
-    public function getfillableTypes()
-    {
-        return $this->fillableType;
-    }
-    
-    protected function asJson($value)
-    {
-        return json_encode($value, JSON_UNESCAPED_UNICODE);
-    }
-    
-    public function toArray()
-    {
-        $attributes = parent::toArray();
-        foreach ($this->getTranslatableAttributes() as $field) {
-            $attributes[$field] = $this->getTranslation($field, app()->getLocale());
-        }
-        return $attributes;
-    }
+    public $translatable = ['name'];
 
     public function lookup_type()
     {
@@ -63,6 +48,4 @@ class Lookup extends Model
     {
         return $this->hasMany(Lookup::class, 'id', 'parent_id');
     }
-
-    
 }

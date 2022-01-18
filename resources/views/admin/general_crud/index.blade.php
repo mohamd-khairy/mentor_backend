@@ -1,7 +1,6 @@
 @extends('adminlte::page')
 @php 
-    $fillable = $request_data['model']->getfillableTypes() ? $request_data['model']->getfillableTypes() : [];
-    $keys = $data ? array_keys(($data->toArray()[0])) : [];
+    $keys = $data ? array_keys(($data->first()->toArray())) : [];
     $heads = $data ? $keys + ['label' => 'Actions'] : [];
 
     $btnEdit = '<button class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
@@ -13,15 +12,15 @@
     $btnDetails = '<button class="btn btn-xs btn-default text-teal mx-1 shadow" title="Details">
                     <i class="fa fa-lg fa-fw fa-eye"></i>
                 </button>';
+       
     $config = [
         'data' => $data->map(function($q){ return array_values($q->toArray()); })->toArray(),
         'order' => [[1, 'asc']],
         'columns' => array_fill(0, count($keys), null),
-      
     ];
 @endphp
 
-@section('title', 'Dashboard')
+@section('title', $request_data['title'])
 
 @section('content_header')
     <h1>{{$request_data['title']}}</h1>

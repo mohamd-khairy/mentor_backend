@@ -10,6 +10,7 @@ class JobInfo extends Model
 {
     use HasFactory;
     use HasTranslations;
+    use GeneralModel;
 
     protected $fillable = [
         'user_id',
@@ -27,15 +28,6 @@ class JobInfo extends Model
         'other',
     ];
 
-    public $with = ['cv'];
-
-    public $translatable = [
-        'job_title',
-        'bio',
-        'topics',
-        'company',
-    ];
-
     public $visible = [
         'id',
         'user_id',
@@ -44,29 +36,20 @@ class JobInfo extends Model
         'company',
     ];
 
-    protected $fillableType = [];
-    
-    public function getfillableTypes()
-    {
-        return $this->fillableType;
-    }
-    
-    protected function asJson($value)
-    {
-        return json_encode($value, JSON_UNESCAPED_UNICODE);
-    }
-    
-    public function toArray()
-    {
-        $attributes = parent::toArray();
-        foreach ($this->getTranslatableAttributes() as $field) {
-            $attributes[$field] = $this->getTranslation($field, app()->getLocale());
-        }
-        return $attributes;
-    }
+    public $translatable = [
+        'job_title',
+        'bio',
+        'topics',
+        'company',
+    ];
 
-    public function cv()
+    public $relations_array = [
+        'user_object' => ['item' => 'user_id', 'relation_name' => 'user', 'coulmn' => 'name'],
+        'photo_object' => ['item' => null, 'relation_name' => 'cv', 'coulmn' => 'name']
+    ];
+
+    public function user()
     {
-        return $this->hasOne(File::class, 'item_id')->where('type', 'cv');
+        return $this->belongsTo(User::class);
     }
 }

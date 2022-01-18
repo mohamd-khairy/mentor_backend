@@ -10,6 +10,7 @@ class ProfileInfo extends Model
 {
     use HasFactory;
     use HasTranslations;
+    use GeneralModel;
 
     protected $fillable = [
         'user_id',
@@ -31,29 +32,35 @@ class ProfileInfo extends Model
         'country_id',
         'city_id'
     ];
-
+    
     public $translatable = [
         'interests',
     ];
 
-    protected $fillableType = [];
-    
-    public function getfillableTypes()
+    public $relations_array = [
+        'gender_object' => ['item' => 'gender_id', 'relation_name' => 'gender', 'coulmn' => 'name'],
+        'country_object' => ['item' => 'country_id', 'relation_name' => 'country', 'coulmn' => 'name'],
+        'city_object' => ['item' => 'city_id', 'relation_name' => 'city', 'coulmn' => 'name'],
+        'user_object' => ['item' => 'user_id', 'relation_name' => 'user', 'coulmn' => 'name'],
+    ];
+
+    public function user()
     {
-        return $this->fillableType;
+        return $this->belongsTo(User::class);
     }
-    
-    protected function asJson($value)
+
+    public function gender()
     {
-        return json_encode($value, JSON_UNESCAPED_UNICODE);
+        return $this->hasOne(Lookup::class, 'id', 'gender_id');
     }
-    
-    public function toArray()
+
+    public function country()
     {
-        $attributes = parent::toArray();
-        foreach ($this->getTranslatableAttributes() as $field) {
-            $attributes[$field] = $this->getTranslation($field, app()->getLocale());
-        }
-        return $attributes;
+        return $this->hasOne(Lookup::class, 'id', 'country_id');
+    }
+
+    public function city()
+    {
+        return $this->hasOne(Lookup::class, 'id', 'city_id');
     }
 }

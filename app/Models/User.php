@@ -13,6 +13,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
     use HasTranslations;
+    use GeneralModel;
 
     protected $fillable = [
         'name',
@@ -28,9 +29,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role_id',
         'mobile',
-        'user_name'
+        'user_name',
+        'role_id'
     ];
 
     protected $hidden = [
@@ -38,34 +39,16 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
-
-    public $appends = ['avatar'];
+    protected $casts = ['email_verified_at' => 'datetime'];
 
     public $translatable = ['name'];
 
-    protected $fillableType = [];
+    public $with = ['photo'];
 
-    public function getfillableTypes()
-    {
-        return $this->fillableType;
-    }
-
-    protected function asJson($value)
-    {
-        return json_encode($value, JSON_UNESCAPED_UNICODE);
-    }
-
-    public function toArray()
-    {
-        $attributes = parent::toArray();
-        foreach ($this->getTranslatableAttributes() as $field) {
-            $attributes[$field] = $this->getTranslation($field, app()->getLocale());
-        }
-        return $attributes;
-    }
+    public $relations_array = [
+        'role_object' => ['item' => 'role_id', 'relation_name' => 'role', 'coulmn' => 'name'],
+        'photo_object' => ['item' => null, 'relation_name' => 'photo', 'coulmn' => 'name']
+    ];
 
     public function role()
     {
@@ -85,10 +68,5 @@ class User extends Authenticatable
     public function photo()
     {
         return $this->hasOne(File::class, 'item_id')->where('type', 'profile');
-    }
-
-    public function getAvatarAttribute()
-    {
-        return $this->photo ? $this->photo->name : null;
     }
 }

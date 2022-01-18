@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class File extends Model
 {
     use HasFactory;
+    use GeneralModel;
 
     protected $fillable = [
         'name',
@@ -19,15 +20,7 @@ class File extends Model
         'id',
         'name',
         'type',
-        'item_id',
     ];
-    
-    public $timestamps = false;
 
-    protected $fillableType = [];
-    
-    public function getfillableTypes()
-    {
-        return $this->fillableType;
-    }
+    public $timestamps = false;
 }

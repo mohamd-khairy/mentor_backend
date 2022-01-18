@@ -24,7 +24,7 @@ class GeneralController extends Controller
         $this->class = str_replace('_', '', Str::title($this->route));
         $object = "App\\Models\\$this->class";
         $this->model = new $object;
-        $this->view = 'general_crud'; //$this->path;
+        $this->view = 'general_crud';
         $this->request_data = [
             'route' => $this->route,
             'model' => $this->model,
@@ -37,7 +37,7 @@ class GeneralController extends Controller
     public function index()
     {
         $data = $this->model->select($this->model->visible)->get();
-        
+        // dd($data->toArray());
         return view('admin.' . $this->view . '.index')
             ->with([
                 'data' => $data,
