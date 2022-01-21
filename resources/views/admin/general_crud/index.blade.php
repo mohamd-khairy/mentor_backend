@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 @php 
-    $keys = $data ? array_keys(($data->first()->toArray())) : [];
-    $heads = $data ? $keys + ['label' => 'Actions'] : [];
+    $keys = count($data) > 0 ? array_keys(($data->first()->toArray())) : [];
+    $heads = count($data) > 0  ? $keys + ['label' => 'Actions'] : [];
        
     $config = [
         'data' => $data->map(function($q){ return array_values($q->toArray()); })->toArray(),

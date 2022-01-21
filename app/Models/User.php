@@ -47,7 +47,28 @@ class User extends Authenticatable
 
     public $relations_array = [
         'role_object' => ['item' => 'role_id', 'relation_name' => 'role', 'coulmn' => 'name'],
-        'photo_object' => ['item' => null, 'relation_name' => 'photo', 'coulmn' => 'name']
+        'photo_object' => ['item' => null, 'relation_name' => 'photo', 'coulmn' => 'img']
+    ];
+
+    public $create_data = [
+        'roles' => ['model' => 'Lookup', 'condition' => ['lookup_type_id' => LookupType::Role]]
+    ];
+
+    public $create = [
+        'input' => [
+            ['type' => 'text', 'icon' => 'user', 'translate' => true, 'id' => 'name', 'name' => 'name'],
+            ['type' => 'text', 'icon' => 'user', 'translate' => false, 'id' => 'user_name', 'name' => 'user_name'],
+            ['type' => 'email', 'icon' => 'envelope', 'translate' => false, 'id' => 'email', 'name' => 'email'],
+            ['type' => 'password', 'icon' => 'key', 'translate' => false, 'id' => 'password', 'name' => 'password'],
+            ['type' => 'number', 'icon' => 'phone', 'translate' => false, 'id' => 'mobile', 'name' => 'mobile'],
+
+        ],
+        'select' => [
+            ['type' => 'select', 'icon' => 'user-tag', 'data' => 'roles', 'data_save_item' => 'id', 'data_display_item' => 'name', 'id' => 'name', 'name' => 'role_id'],
+        ],
+        'image' => [
+            ['type' => 'image', 'icon' => 'image', 'id' => 'image', 'name' => 'image'],
+        ],
     ];
 
     public function role()

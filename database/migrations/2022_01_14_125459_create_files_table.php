@@ -18,6 +18,7 @@ class CreateFilesTable extends Migration
             $table->unsignedBigInteger('item_id')->nullable();
             $table->text('name')->nullable();
             $table->string('type')->unique();
+            $table->string('model')->unique();
         });
     }
 

@@ -12,6 +12,8 @@ class LookupType extends Model
     use HasTranslations;
     use GeneralModel;
 
+    CONST Role = 1;
+    
     /**
      * The attributes that are mass assignable.
      *

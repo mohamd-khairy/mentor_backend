@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\Hash;
+
 trait GeneralModel
 {
     public function toArray()
@@ -36,5 +38,10 @@ trait GeneralModel
     protected function asJson($value)
     {
         return json_encode($value, JSON_UNESCAPED_UNICODE);
+    }
+
+    public function setPasswordAttribute($value)
+    {
+        return $this->attributes['password'] = $value ? Hash::make($value) : null;
     }
 }

@@ -33,6 +33,18 @@ class AdminGeneralValidation extends FormRequest
                     'key' => 'required'
                 ];
                 break;
+
+            case 'user':
+                return [
+                    'name_en' => 'required',
+                    'name_en' => 'required',
+                    'role_id' => 'required',
+                    'email' => 'required',
+                    'password' => 'required',
+                    'mobile' => 'required',
+                    'image' => 'required',
+                ];
+                break;
             default:
                 return [];
                 break;
