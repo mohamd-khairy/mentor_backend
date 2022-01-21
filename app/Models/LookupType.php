@@ -23,7 +23,7 @@ class LookupType extends Model
         'key',
     ];
 
-    public $visible = [
+    public $selected = [
         'id',
         'name',
         'key',

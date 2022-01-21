@@ -23,5 +23,6 @@ return [
     'profile_info'                  => 'Profile Info',
     'job_info'                      => 'Job Info',
     'file'                          => 'Media',
-
+    'lookup_type'                   => 'Lookup Type',
+    'lookup'                        => 'Lookup',
 ];

@@ -16,7 +16,7 @@ class File extends Model
         'item_id',
     ];
 
-    public $visible = [
+    public $selected = [
         'id',
         'name',
         'type',

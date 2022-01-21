@@ -233,14 +233,17 @@ return [
         [
             'text'    => 'users',
             'url'    => 'user',
+            'active' => ['users', 'user', 'user*', 'regex:@^user/[0-9]+$@']
         ],
         [
             'text'    => 'job_info',
             'url'    => 'job_info',
+            'active' => ['job_info', 'job_info', 'job_info*', 'regex:@^job_info/[0-9]+$@']
         ],
         [
             'text'    => 'profile_info',
             'url'    => 'profile_info',
+            'active' => ['profile_info', 'profile_info', 'profile_info*', 'regex:@^profile_info/[0-9]+$@']
         ],
         ['header' => 'lookup_section'],
         [
@@ -250,17 +253,20 @@ return [
                 [
                     'text' => 'lookup_type',
                     'url'  => 'lookup_type',
+                    'active' => ['lookups', 'lookup_type', 'lookup_type*', 'regex:@^lookup_type/[0-9]+$@']
                 ],
                 [
                     'text' => 'lookup',
                     'url'  => 'lookup',
+                    'active' => ['lookups', 'lookup', 'lookup/*', 'regex:@^lookup/[0-9]+$@']
                 ],
             ],
         ],
         [
             'text'    => 'file',
             'url'    => 'file',
-            'icon_color' => 'red'
+            'icon_color' => 'red',
+            'active' => ['file', 'file', 'file*', 'regex:@^file/[0-9]+$@']
         ],
         // [
         //     'type'         => 'navbar-search',
@@ -405,6 +411,51 @@ return [
                     'type' => 'css',
                     'asset' => true,
                     'location' => '//cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css',
+                ],
+            ],
+        ],
+        'DatatablesPlugins' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/datatables-plugins/buttons/js/dataTables.buttons.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/datatables-plugins/buttons/js/buttons.bootstrap4.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/datatables-plugins/buttons/js/buttons.html5.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/datatables-plugins/buttons/js/buttons.print.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/datatables-plugins/jszip/jszip.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/datatables-plugins/pdfmake/pdfmake.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/datatables-plugins/pdfmake/vfs_fonts.js',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/datatables-plugins/buttons/css/buttons.bootstrap4.min.css',
                 ],
             ],
         ],

@@ -9,7 +9,7 @@ trait GeneralModel
         $attributes = parent::toArray();
         try {
             foreach ($this->getTranslatableAttributes() as $field) {
-                if (in_array($field, $this->visible)) {
+                if (in_array($field, $this->selected)) {
                     $attributes[$field] = $this->getTranslation($field, app()->getLocale());
                 }
             }

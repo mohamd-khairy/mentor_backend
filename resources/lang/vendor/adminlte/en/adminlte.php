@@ -1,7 +1,11 @@
 <?php
 
 return [
-
+    'create'                      => 'Create',
+    'edit'                        => 'Edit',
+    'show'                        => 'Show',
+    'key'                         => 'key',
+    'value'                       => 'Value',
     'full_name'                   => 'Full name',
     'email'                       => 'Email',
     'password'                    => 'Password',

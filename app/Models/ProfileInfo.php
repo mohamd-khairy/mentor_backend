@@ -22,7 +22,7 @@ class ProfileInfo extends Model
         'city_id'
     ];
 
-    public $visible = [
+    public $selected = [
         'id',
         'user_id',
         'birth_date',

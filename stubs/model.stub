@@ -11,5 +11,5 @@ class {{ class }} extends Model
     use GeneralModel;
 
 
-    public $visible = [];
+    public $selected = [];
 }

@@ -24,7 +24,7 @@ class User extends Authenticatable
         'user_name'
     ];
 
-    public $visible = [
+    public $selected = [
         'id',
         'name',
         'email',

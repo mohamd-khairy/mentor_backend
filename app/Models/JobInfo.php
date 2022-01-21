@@ -28,7 +28,7 @@ class JobInfo extends Model
         'other',
     ];
 
-    public $visible = [
+    public $selected = [
         'id',
         'user_id',
         'job_title',

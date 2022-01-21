@@ -19,7 +19,7 @@ class Lookup extends Model
         'lookup_type_id'
     ];
 
-    public $visible = [
+    public $selected = [
         'id',
         'name',
         'key',

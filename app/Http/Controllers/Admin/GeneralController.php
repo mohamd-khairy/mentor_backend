@@ -34,11 +34,41 @@ class GeneralController extends Controller
         ];
     }
 
+    public function create()
+    {
+        return view('admin.' . $this->view . '.create')
+            ->with([
+                'request_data' => $this->request_data
+            ]);
+    }
+
     public function index()
     {
-        $data = $this->model->select($this->model->visible)->get();
+        $data = $this->model->select($this->model->selected)->get();
         // dd($data->toArray());
         return view('admin.' . $this->view . '.index')
+            ->with([
+                'data' => $data,
+                'request_data' => $this->request_data
+            ]);
+    }
+
+    public function show($id)
+    {
+        $data = $this->model->findOrFail($id);
+        // dd($data->toArray());
+        return view('admin.' . $this->view . '.show')
+            ->with([
+                'data' => $data,
+                'request_data' => $this->request_data
+            ]);
+    }
+
+    public function edit($id)
+    {
+        $data = $this->model->findOrFail($id);
+        // dd($data->toArray());
+        return view('admin.' . $this->view . '.edit')
             ->with([
                 'data' => $data,
                 'request_data' => $this->request_data
