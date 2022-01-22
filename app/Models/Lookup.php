@@ -23,8 +23,8 @@ class Lookup extends Model
         'id',
         'name',
         'key',
-        'parent_id',
-        'lookup_type_id'
+        'parent',
+        'lookup_type'
     ];
 
     public $relations_array = [

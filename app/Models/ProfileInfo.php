@@ -24,13 +24,13 @@ class ProfileInfo extends Model
 
     public $selected = [
         'id',
-        'user_id',
+        'user',
         'birth_date',
         'phone',
         'interests',
-        'gender_id',
-        'country_id',
-        'city_id'
+        'gender',
+        'country',
+        'city'
     ];
     
     public $translatable = [

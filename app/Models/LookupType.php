@@ -21,7 +21,6 @@ class LookupType extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'id',
         'name',
         'key',
     ];
@@ -30,15 +29,6 @@ class LookupType extends Model
         'id',
         'name',
         'key',
-    ];
-
-    public $fillableType = [
-        ['item_name' => 'name' , 'item_type' => 'input'],
-        ['item_name' => 'key' , 'item_type' => 'input'],
-    ];
-
-    public $casts = [
-        'name' => 'array',
     ];
 
     public $translatable = ['name'];

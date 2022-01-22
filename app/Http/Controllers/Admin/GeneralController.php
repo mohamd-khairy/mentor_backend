@@ -41,12 +41,7 @@ class GeneralController extends Controller
     {
         Gate::authorize('access-' . $this->route);
 
-        $data = $this->model;
-        if (isset($this->model->selected) && !empty($this->model->selected)) {
-            $data = $data->select($this->model->selected);
-        }
-        $data = $data->get();
-        // dd($data->toArray());
+        $data = $this->model->get();
         return view('admin.' . $this->view . '.index')
             ->with([
                 'data' => $data,

@@ -30,10 +30,11 @@ class JobInfo extends Model
 
     public $selected = [
         'id',
-        'user_id',
+        'user',
         'job_title',
         'topics',
         'company',
+        'cv'
     ];
 
     public $translatable = [
@@ -51,5 +52,10 @@ class JobInfo extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function cv()
+    {
+        return $this->hasOne(File::class, 'item_id', 'user_id')->where('type', 'cv');
     }
 }

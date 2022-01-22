@@ -11,7 +11,9 @@ class RolePermission extends Model
     use GeneralModel;
 
     public $fillable = ['role_id', 'permission_id', 'key'];
-    public $selected = ['id', 'role_id', 'permission_id', 'key'];
+    
+    public $selected = ['id', 'role', 'permission', 'key'];
+
     public $relations_array = [
         'role_object' => ['item' => 'role_id', 'relation_name' => 'role', 'coulmn' => 'name'],
         'permission_object' => ['item' => 'permission_id', 'relation_name' => 'permission', 'coulmn' => 'name'],
