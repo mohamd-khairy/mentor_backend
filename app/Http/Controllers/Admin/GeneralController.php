@@ -42,8 +42,8 @@ class GeneralController extends Controller
     {
         Gate::authorize('access-' . $this->route);
 
-        $data =  Cache::remember('data', now()->addMinutes(30), function ()  {
-            return $this->model->paginate(10);
+        $data =  Cache::remember($this->route, now()->addMinutes(30), function ()  {
+            return $this->model->get();
         });
 
         return view('admin.' . $this->view . '.index')
