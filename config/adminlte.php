@@ -233,41 +233,57 @@ return [
         [
             'text'    => 'users',
             'url'    => 'user',
+            'can'  => ['access-user'],
             'active' => ['users', 'user', 'user*', 'regex:@^user/[0-9]+$@']
         ],
         [
             'text'    => 'job_info',
             'url'    => 'job_info',
+            'can'  => ['access-job_info'],
             'active' => ['job_info', 'job_info', 'job_info*', 'regex:@^job_info/[0-9]+$@']
         ],
         [
             'text'    => 'profile_info',
             'url'    => 'profile_info',
+            'can'  => ['access-profile_info'],
             'active' => ['profile_info', 'profile_info', 'profile_info*', 'regex:@^profile_info/[0-9]+$@']
         ],
         ['header' => 'lookup_section'],
         [
             'text'    => 'lookups',
             'icon'    => 'fas fa-fw fa-share',
+            'can'  => ['access-lookup_type', 'lookup'],
             'submenu' => [
                 [
                     'text' => 'lookup_type',
                     'url'  => 'lookup_type',
+                    'can'  => ['access-lookup_type'],
                     'active' => ['lookups', 'lookup_type', 'lookup_type*', 'regex:@^lookup_type/[0-9]+$@']
                 ],
                 [
                     'text' => 'lookup',
                     'url'  => 'lookup',
+                    'can'  => ['access-lookup'],
                     'active' => ['lookups', 'lookup', 'lookup/*', 'regex:@^lookup/[0-9]+$@']
                 ],
+
             ],
+        ],
+        [
+            'text' => 'role_permission',
+            'url'  => 'role_permission',
+            'can'  => ['access-role_permission'],
+            'icon_color' => 'red',
+            'active' => ['lookups', 'role_permission', 'role_permission*', 'regex:@^role_permission/[0-9]+$@']
         ],
         [
             'text'    => 'file',
             'url'    => 'file',
+            'can'  => ['access-file'],
             'icon_color' => 'red',
             'active' => ['file', 'file', 'file*', 'regex:@^file/[0-9]+$@']
         ],
+
         // [
         //     'type'         => 'navbar-search',
         //     'text'         => 'search',
@@ -509,6 +525,7 @@ return [
                 ],
             ],
         ],
+
     ],
 
     /*

@@ -31,37 +31,39 @@
 @section('content')
 
 <x-adminlte-datatable id="table1" :heads="$heads" head-theme="dark" with-buttons striped hoverable bordered compressed>
-    @foreach($config['data'] as $row)
-        <tr>
-            @foreach($row as $cell)
-                @if($loop->first)
-                @php $id = $cell; @endphp
-                @endif
+    @if(isset($config['data']) && count($config['data']) > 0)
+        @foreach($config['data'] as $row)
+            <tr>
+                @foreach($row as $cell)
+                    @if($loop->first)
+                    @php $id = $cell; @endphp
+                    @endif
 
-                <td>{!! $cell !!}</td>
-                
-                @if($loop->last)
-                <td>
-                <nobr>
-                    <a class="btn btn-xs btn-default text-teal mx-1 shadow" href="{{route('admin.'.$request_data['route'].'.show' , $id)}}" title="Details">
-                        <i class="fa fa-lg fa-fw fa-eye"></i>
-                    </a>
-                    <a class="btn btn-xs btn-default text-primary mx-1 shadow" href="{{route('admin.'.$request_data['route'].'.edit' , $id)}}" title="Edit">
-                        <i class="fa fa-lg fa-fw fa-pen"></i>
-                    </a>
+                    <td>{!! $cell !!}</td>
                     
-                    <form action="{{route('admin.'.$request_data['route'].'.destroy' , $id)}}" method="post" onsubmit="return confirm('Are You Sure?');" style="display: inline-block;">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <input type="hidden" name="_method" value="delete">
-                        <button class="btn btn-xs btn-default text-danger mx-1 shadow" type="submit" href="#" title="Delete">
-                            <i class="fa fa-lg fa-fw fa-trash"></i>
-                        </button>
-                    </form>
-                </nobr>
-                @endif
-            @endforeach
-        </tr>
-    @endforeach
+                    @if($loop->last)
+                    <td>
+                    <nobr>
+                        <a class="btn btn-xs btn-default text-teal mx-1 shadow" href="{{route('admin.'.$request_data['route'].'.show' , $id)}}" title="Details">
+                            <i class="fa fa-lg fa-fw fa-eye"></i>
+                        </a>
+                        <a class="btn btn-xs btn-default text-primary mx-1 shadow" href="{{route('admin.'.$request_data['route'].'.edit' , $id)}}" title="Edit">
+                            <i class="fa fa-lg fa-fw fa-pen"></i>
+                        </a>
+                        
+                        <form action="{{route('admin.'.$request_data['route'].'.destroy' , $id)}}" method="post" onsubmit="return confirm('Are You Sure?');" style="display: inline-block;">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <input type="hidden" name="_method" value="delete">
+                            <button class="btn btn-xs btn-default text-danger mx-1 shadow" type="submit" href="#" title="Delete">
+                                <i class="fa fa-lg fa-fw fa-trash"></i>
+                            </button>
+                        </form>
+                    </nobr>
+                    @endif
+                @endforeach
+            </tr>
+        @endforeach
+    @endif
 </x-adminlte-datatable>
 
 @stop

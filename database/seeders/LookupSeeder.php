@@ -57,6 +57,68 @@ class LookupSeeder extends Seeder
         foreach ($lookups_role as $l) {
             Lookup::create($l);
         }
+         /**************************** lookup permissions************************** */
+         $lookup_type_permissions_id = LookupType::select('id')->where('key', 'permissions')->first()->id;
+         $lookups_subcategory = [
+             [
+                 'name' => [
+                     'en' => 'Create User',
+                     'ar' => 'انشاء مستخدم'
+                 ],
+                 'key' => 'create-user',
+                 'parent_id' => null,
+                 'lookup_type_id' => $lookup_type_permissions_id,
+                 'created_at' => now(),
+                 'updated_at' => now(),
+             ],
+             [
+                'name' => [
+                    'en' => 'edit User',
+                    'ar' => 'تعديل مستخدم'
+                ],
+                'key' => 'edit-user',
+                'parent_id' => null,
+                'lookup_type_id' => $lookup_type_permissions_id,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => [
+                    'en' => 'show User',
+                    'ar' => 'مشاهده مستخدم'
+                ],
+                'key' => 'show-user',
+                'parent_id' => null,
+                'lookup_type_id' => $lookup_type_permissions_id,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => [
+                    'en' => 'delete User',
+                    'ar' => 'حذف مستخدم'
+                ],
+                'key' => 'delete-user',
+                'parent_id' => null,
+                'lookup_type_id' => $lookup_type_permissions_id,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => [
+                    'en' => 'access User',
+                    'ar' => 'التحكم مستخدم'
+                ],
+                'key' => 'access-user',
+                'parent_id' => null,
+                'lookup_type_id' => $lookup_type_permissions_id,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+         ];
+         foreach ($lookups_subcategory as $l) {
+             Lookup::create($l);
+         }
         /**************************** lookup gender************************** */
         $lookup_type_gender_id = LookupType::select('id')->where('key', 'gender')->first()->id;
         $lookups_gender = [
@@ -183,8 +245,6 @@ class LookupSeeder extends Seeder
         foreach ($lookups_subcategory as $l) {
             Lookup::create($l);
         }
-
-
 
         User::create([
             'user_name' => Str::slug('admin'),

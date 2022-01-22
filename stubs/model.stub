@@ -10,7 +10,9 @@ class {{ class }} extends Model
     use HasFactory;
     use GeneralModel;
 
-
+    public $fillable = [];
     public $selected = [];
     public $relations_array = [];
+    public $create = [];
+    public $create_data = [];
 }

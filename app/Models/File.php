@@ -26,7 +26,6 @@ class File extends Model
     public static function boot()
     {
         parent::boot();
-
         self::deleting(function ($value) {
             if (file_exists(public_path($value->name))) {
                 unlink(public_path($value->name));

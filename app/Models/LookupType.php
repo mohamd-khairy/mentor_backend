@@ -13,6 +13,7 @@ class LookupType extends Model
     use GeneralModel;
 
     CONST Role = 1;
+    CONST Permission = 7;
     
     /**
      * The attributes that are mass assignable.

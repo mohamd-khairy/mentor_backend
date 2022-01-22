@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CustomController;
 use App\Http\Controllers\Admin\GeneralController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -15,4 +16,6 @@ Route::group(['middleware' => 'auth:sanctum', 'as' => 'admin.'], function () {
     Route::resource('file', GeneralController::class);
     Route::resource('job_info', GeneralController::class);
     Route::resource('profile_info', GeneralController::class);
+    Route::resource('role_permission', GeneralController::class)->except('store');
+    Route::post('role_permission', [CustomController::class, 'store_role_permission'])->name('role_permission.store');
 });

@@ -69,6 +69,15 @@ class LookupTypeSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'name' => [
+                    'en' => 'Permissions',
+                    'ar' => 'الصلاحيات'
+                ],
+                'key' => 'permissions',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ];
 
         foreach ($lookup_types as $l) {

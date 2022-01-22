@@ -22,7 +22,7 @@ trait GeneralModel
             foreach ($this->relations_array as $key => $field) {
                 if ($field['relation_name']) {
                     $attributes[$field['relation_name']] = $this->{$field['relation_name']}->{$field['coulmn']} ?? '';
-                    unset($attributes[$field['item']]);
+                    // unset($attributes[$field['item']]);
                 }
             }
         } catch (\Throwable $th) {

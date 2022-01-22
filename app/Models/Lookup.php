@@ -48,4 +48,9 @@ class Lookup extends Model
     {
         return $this->hasMany(Lookup::class, 'id', 'parent_id');
     }
+
+    public function permissions()
+    {
+        return $this->hasMany(RolePermission::class, 'role_id');
+    }
 }

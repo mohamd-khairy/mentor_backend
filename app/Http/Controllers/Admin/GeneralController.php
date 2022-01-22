@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminGeneralValidation;
 use App\Models\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Request as FacadesRequest;
 use Illuminate\Support\Str;
 
@@ -38,11 +39,14 @@ class GeneralController extends Controller
 
     public function index()
     {
+        Gate::authorize('access-' . $this->route);
+
         $data = $this->model;
         if (isset($this->model->selected) && !empty($this->model->selected)) {
             $data = $data->select($this->model->selected);
         }
         $data = $data->get();
+        // dd($data->toArray());
         return view('admin.' . $this->view . '.index')
             ->with([
                 'data' => $data,
@@ -52,8 +56,10 @@ class GeneralController extends Controller
 
     public function create()
     {
+        Gate::authorize('create-' . $this->route);
+
         $data = [];
-        if (isset($this->model->create_data)) {
+        if (isset($this->model->create_data) && count($this->model->create_data) > 0) {
             foreach ($this->model->create_data as $name => $values) {
                 if (isset($values['model'])) {
                     $object = "App\\Models\\{$values['model']}";
@@ -74,6 +80,8 @@ class GeneralController extends Controller
 
     public function store(AdminGeneralValidation $request)
     {
+        Gate::authorize('create-' . $this->route);
+
         $data = $request->all();
         $data = $data + $this->translated_data($data);
         $item = $this->model->create($data);
@@ -84,27 +92,10 @@ class GeneralController extends Controller
             ->with('success', 'successfully');
     }
 
-    public function destroy($id)
-    {
-        $data = $this->model->findOrFail($id);
-        $data->delete();
-        $this->delete_image($id, $this->route);
-        return redirect()->route('admin.' . $this->route . '.index')
-            ->with('success', 'successfully');
-    }
-
-    public function show($id)
-    {
-        $data = $this->model->findOrFail($id);
-        return view('admin.' . $this->view . '.show')
-            ->with([
-                'data' => $data,
-                'request_data' => $this->request_data
-            ]);
-    }
-
     public function edit($id)
     {
+        Gate::authorize('edit-' . $this->route);
+
         $data = $this->model->findOrFail($id);
         return view('admin.' . $this->view . '.edit')
             ->with([
@@ -113,61 +104,30 @@ class GeneralController extends Controller
             ]);
     }
 
-    public function upload_image($type = null, $item_id = null, $image = null)
+    public function show($id)
     {
-        try {
-            if ($image && $type && $item_id) {
-                if (is_array($image)) {
-                    foreach ($image as $img) {
-                        $image_name = time() . rand(1, 100000) . '.' . $img->getClientOriginalExtension();
-                        $img->move(public_path('images/' . $type ?? 'all'), $image_name);
-                        $name = 'images/' . $type . '/' . $image_name;
-                        File::firstOrCreate(['item_id' => $item_id, 'type' => $type, 'name' => $name, 'model' => $this->route]);
-                    }
-                } else {
-                    $image_name = time() . rand(1, 100000) . '.' . $image->getClientOriginalExtension();
-                    $image->move(public_path('images/' . $type), $image_name);
-                    $name = 'images/' . $type . '/' . $image_name;
-                    $file = File::firstOrCreate(['item_id' => $item_id, 'type' => $type, 'name' => $name, 'model' => $this->route]);
-                    return $file->name;
-                }
-            }
-            return null;
-            //code...
-        } catch (\Throwable $th) {
-            return null;
-        }
+        Gate::authorize('show-' . $this->route);
+
+        $data = $this->model->findOrFail($id);
+        return view('admin.' . $this->view . '.show')
+            ->with([
+                'data' => $data,
+                'request_data' => $this->request_data
+            ]);
     }
 
-    public function delete_image($id = null, $model)
+    public function destroy($id)
     {
-        try {
-            $files = File::where(['item_id' => $id, 'model' => $model])->get();
-            foreach ($files as  $value) {
-                if (file_exists(public_path($value->name))) {
-                    unlink(public_path($value->name));
-                }
-            }
-            $files = File::where(['item_id' => $id, 'model' => $model])->delete();
-        } catch (\Throwable $th) {
-            //throw $th;
-        }
-    }
+        Gate::authorize('delete-' . $this->route);
 
-    public function translated_data($data)
-    {
-        try {
-            if (isset($this->model->translatable)) {
-                foreach ($this->model->translatable as $value) {
-                    $en = isset($data[$value . '_en']) ? $data[$value . '_en'] : null;
-                    $ar = isset($data[$value . '_ar']) ? $data[$value . '_ar'] : null;
-                    $data[$value] = ['en' => $en, 'ar' => $ar];
-                }
-                return $data;
+        $data = $this->model->findOrFail($id);
+        if ($data->delete()) {
+            $files = File::where(['item_id' => $id, 'model' => $this->route])->get();
+            if ($files) {
+                $files->map->delete();
             }
-            return [];
-        } catch (\Throwable $th) {
-            return [];
         }
+        return redirect()->route('admin.' . $this->route . '.index')
+            ->with('success', 'successfully');
     }
 }
