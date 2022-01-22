@@ -34,6 +34,8 @@ class Lookup extends Model
 
     public $translatable = ['name'];
 
+    public $with = ['lookup_type' , 'parent'];
+
     public function lookup_type()
     {
         return $this->belongsTo(LookupType::class);

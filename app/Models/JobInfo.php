@@ -49,6 +49,8 @@ class JobInfo extends Model
         'photo_object' => ['item' => null, 'relation_name' => 'cv', 'coulmn' => 'name']
     ];
 
+    public $with = ['user' , 'cv'];
+
     public function user()
     {
         return $this->belongsTo(User::class);

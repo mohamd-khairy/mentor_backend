@@ -8,6 +8,7 @@ use App\Models\RolePermission;
 use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
@@ -31,7 +32,9 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::before(function ($user, $ability) {
-            $permissions = RolePermission::where('role_id', $user->role_id)->pluck('key');
+            $permissions = Cache::remember('users', now()->addHours(1), function () use($user) {
+                return RolePermission::where('role_id', $user->role_id)->pluck('key');;
+            });
             if (($permissions && in_array($ability, $permissions->toArray())) || $user->role == 'admin' || $user->role_id == 1) {
                 return true;
             }

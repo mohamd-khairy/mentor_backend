@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             LookupSeeder::class,
         ]);
 
-        \App\Models\User::factory(4)->create()->each(function ($u) {
+        \App\Models\User::factory(100)->create()->each(function ($u) {
             if ($u->role_id == 2) {
                 \App\Models\ProfileInfo::factory(1)->create(['user_id' => $u->id]);
             } elseif ($u->role_id == 3) {

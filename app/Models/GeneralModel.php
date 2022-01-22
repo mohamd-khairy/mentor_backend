@@ -30,11 +30,6 @@ trait GeneralModel
         return $attributes;
     }
 
-    public function getfillableTypes()
-    {
-        return $this->fillableType;
-    }
-
     protected function asJson($value)
     {
         return json_encode($value, JSON_UNESCAPED_UNICODE);

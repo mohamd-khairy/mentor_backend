@@ -31,6 +31,8 @@ class RolePermission extends Model
         ],
     ];
 
+    public $with = ['role' , 'permission'];
+
 
     public function role()
     {

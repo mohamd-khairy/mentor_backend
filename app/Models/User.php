@@ -46,7 +46,7 @@ class User extends Authenticatable
 
     public $translatable = ['name'];
 
-    public $with = ['photo'];
+    public $with = ['photo' , 'role'];
 
     public $relations_array = [
         'role_object' => ['item' => 'role_id', 'relation_name' => 'role', 'coulmn' => 'name'],

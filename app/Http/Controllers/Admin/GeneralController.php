@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminGeneralValidation;
 use App\Models\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Request as FacadesRequest;
 use Illuminate\Support\Str;
@@ -41,7 +42,10 @@ class GeneralController extends Controller
     {
         Gate::authorize('access-' . $this->route);
 
-        $data = $this->model->get();
+        $data =  Cache::remember('data', now()->addMinutes(30), function ()  {
+            return $this->model->paginate(10);
+        });
+
         return view('admin.' . $this->view . '.index')
             ->with([
                 'data' => $data,

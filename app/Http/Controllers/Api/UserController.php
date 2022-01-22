@@ -21,7 +21,6 @@ class UserController extends Controller
             $data = $request->validated();
             $data['name'] = ['en' => $request->name, 'ar' => $request->name];
             $data['user_name'] = Str::slug($request->name);
-            $data['password'] = Hash::make($request->password);
             $data['role_id'] =  Lookup::where('key', $request->type)->first()->id  ?? null;
             $user = User::create($data);
 

@@ -25,4 +25,5 @@ return [
     'file'                          => 'Media',
     'lookup_type'                   => 'Lookup Type',
     'lookup'                        => 'Lookup',
+    'role_permission'               => 'Roles & Permissions'
 ];

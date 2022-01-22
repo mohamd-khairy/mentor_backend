@@ -44,6 +44,8 @@ class ProfileInfo extends Model
         'user_object' => ['item' => 'user_id', 'relation_name' => 'user', 'coulmn' => 'name'],
     ];
 
+    public $with = ['user' , 'gender' , 'country' , 'city'];
+
     public function user()
     {
         return $this->belongsTo(User::class);
