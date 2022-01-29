@@ -5,3 +5,4 @@
         </div>
     </x-slot>
 </x-adminlte-input-file>
+<input type="hidden" name="type" value="{{$type}}">

@@ -8,6 +8,11 @@
         }
     }
     $heads = isset($heads) ? $heads + ['label' => 'Actions'] : [];
+
+    $config = [
+        'pageLength' => 10,
+        'order' => [[0, 'desc']],
+    ];
 @endphp
 
 @section('title', $request_data['title'])
@@ -25,7 +30,7 @@
 @stop
 
 @section('content')
-<x-adminlte-datatable id="table1" :heads="$heads" head-theme="dark" with-buttons striped hoverable bordered compressed>
+<x-adminlte-datatable id="table1" :config="$config" :heads="$heads" head-theme="dark" with-buttons striped hoverable bordered compressed>
     @if(isset($data) && count($data) > 0)
         @foreach($data->toArray() as $row)
             <tr>

@@ -17,7 +17,7 @@ class File extends Model
         'model'
     ];
 
-    public $selected = ['id' , 'type' , 'model' , 'img'];
+    public $selected = ['id', 'type', 'item_id', 'model', 'img'];
 
     public $appends = ['img'];
 

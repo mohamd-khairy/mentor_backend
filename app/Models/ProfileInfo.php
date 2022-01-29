@@ -46,6 +46,32 @@ class ProfileInfo extends Model
 
     public $with = ['user' , 'gender' , 'country' , 'city'];
 
+    public $create_data = [
+        'users' => ['model' => 'User'],
+        'genders' => ['model' => 'Lookup', 'condition' => ['lookup_type_id' => LookupType::Gender]],
+        'countries' => ['model' => 'Lookup', 'condition' => ['lookup_type_id' => LookupType::Country]],
+        'cities' => ['model' => 'Lookup', 'condition' => ['lookup_type_id' => LookupType::City]],
+    ];
+
+
+    public $create = [
+        'select' => [
+            ['type' => 'select', 'icon' => 'user-tag', 'data' => 'users', 'data_save_item' => 'id', 'data_display_item' => 'name', 'id' => 'user_id', 'name' => 'user_id'],
+            ['type' => 'select', 'icon' => 'user-tag', 'data' => 'genders', 'data_save_item' => 'id', 'data_display_item' => 'name', 'id' => 'gender_id', 'name' => 'gender_id'],
+            ['type' => 'select', 'icon' => 'user-tag', 'data' => 'countries', 'data_save_item' => 'id', 'data_display_item' => 'name', 'id' => 'country_id', 'name' => 'country_id'],
+            ['type' => 'select', 'icon' => 'user-tag', 'data' => 'cities', 'data_save_item' => 'id', 'data_display_item' => 'name', 'id' => 'city_id', 'name' => 'city_id'],
+        ],
+        'textarea' => [
+            ['type' => 'text', 'icon' => 'user', 'translate' => true, 'id' => 'interests', 'name' => 'interests'],
+        ],
+        'input' => [
+            ['type' => 'number', 'icon' => 'user', 'translate' => false, 'id' => 'phone', 'name' => 'phone'],
+        ],
+        'date' => [
+            ['type' => 'date', 'icon' => 'birthday-cake', 'id' => 'birth_date', 'name' => 'birth_date'],//datetime-local
+        ]
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

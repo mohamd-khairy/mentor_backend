@@ -13,6 +13,9 @@ class LookupType extends Model
     use GeneralModel;
 
     CONST Role = 1;
+    CONST Gender = 2;
+    CONST Country = 3;
+    CONST City = 4;
     CONST Permission = 7;
     
     /**
@@ -32,4 +35,11 @@ class LookupType extends Model
     ];
 
     public $translatable = ['name'];
+
+    public $create = [
+        'input' => [
+            ['type' => 'text', 'icon' => 'user', 'translate' => true, 'id' => 'name', 'name' => 'name'],
+            ['type' => 'text', 'icon' => 'user', 'translate' => false, 'id' => 'key', 'name' => 'key'],
+        ],
+    ];
 }

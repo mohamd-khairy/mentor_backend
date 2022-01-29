@@ -29,7 +29,8 @@ class AdminGeneralValidation extends FormRequest
         switch (Request::segment(1)) {
             case 'lookup_type':
                 return [
-                    'name' => 'required',
+                    'name_en' => 'required',
+                    'name_ar' => 'required',
                     'key' => 'required'
                 ];
                 break;
@@ -37,7 +38,7 @@ class AdminGeneralValidation extends FormRequest
             case 'user':
                 return [
                     'name_en' => 'required',
-                    'name_en' => 'required',
+                    'name_ar' => 'required',
                     'role_id' => 'required',
                     'email' => 'required',
                     'password' => 'required',

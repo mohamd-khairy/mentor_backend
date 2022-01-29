@@ -25,8 +25,12 @@
                             @foreach($item as $k => $v)
                                 @if($type == 'input')
                                     @include('admin.forms.input' , $v)
+                                @elseif($type == 'textarea')
+                                    @include('admin.forms.textarea' , $v)
                                 @elseif($type == 'select')
                                     @include('admin.forms.select' , $v + ['relations' => $data])
+                                @elseif($type == 'date')
+                                    @include('admin.forms.date' , $v)
                                 @elseif($type == 'image')
                                     @include('admin.forms.image' , $v)
                                 @endif

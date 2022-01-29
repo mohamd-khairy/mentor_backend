@@ -36,6 +36,22 @@ class Lookup extends Model
 
     public $with = ['lookup_type' , 'parent'];
 
+    public $create_data = [
+        'parents' => ['model' => 'Lookup', 'condition' => ['parent_id' => null]],
+        'lookup_types' => ['model' => 'LookupType'],
+    ];
+
+    public $create = [
+        'input' => [
+            ['type' => 'text', 'icon' => 'user', 'translate' => true, 'id' => 'name', 'name' => 'name'],
+            ['type' => 'text', 'icon' => 'user', 'translate' => false, 'id' => 'key', 'name' => 'key'],
+        ],
+        'select' => [
+            ['type' => 'select', 'icon' => 'user-tag', 'data' => 'parents', 'data_save_item' => 'id', 'data_display_item' => 'name', 'id' => 'parent_id', 'name' => 'parent_id'],
+            ['type' => 'select', 'icon' => 'user-tag', 'data' => 'lookup_types', 'data_save_item' => 'id', 'data_display_item' => 'name', 'id' => 'lookup_type_id', 'name' => 'lookup_type_id'],
+        ],
+    ];
+
     public function lookup_type()
     {
         return $this->belongsTo(LookupType::class);

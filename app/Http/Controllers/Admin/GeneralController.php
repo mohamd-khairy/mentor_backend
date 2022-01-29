@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminGeneralValidation;
 use App\Models\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Request as FacadesRequest;
@@ -85,8 +86,10 @@ class GeneralController extends Controller
         $data = $data + $this->translated_data($data);
         $item = $this->model->create($data);
         if ($request->image && $item) {
-            $this->upload_image('profile', $item->id, $request->image);
+            $this->upload_image($request->type, $item->id, $request->image);
         }
+
+        Artisan::call('cache:clear');
         return redirect()->route('admin.' . $this->route . '.index')
             ->with('success', 'successfully');
     }
@@ -126,6 +129,8 @@ class GeneralController extends Controller
                 $files->map->delete();
             }
         }
+
+        Artisan::call('cache:clear');
         return redirect()->route('admin.' . $this->route . '.index')
             ->with('success', 'successfully');
     }

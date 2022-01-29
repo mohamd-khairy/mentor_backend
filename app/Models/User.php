@@ -70,7 +70,7 @@ class User extends Authenticatable
             ['type' => 'select', 'icon' => 'user-tag', 'data' => 'roles', 'data_save_item' => 'id', 'data_display_item' => 'name', 'id' => 'name', 'name' => 'role_id'],
         ],
         'image' => [
-            ['type' => 'image', 'icon' => 'image', 'id' => 'image', 'name' => 'image'],
+            ['type' => 'profile', 'icon' => 'image', 'id' => 'image', 'name' => 'image'],
         ],
     ];
 
